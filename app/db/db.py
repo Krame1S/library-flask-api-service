@@ -23,7 +23,7 @@ def get_all_books():
 
     result = []
     for book in books:
-        books_dict = {'isbn': book[0], 'title': book[1], 'copies': book[3]}
+        books_dict = {'isbn': book[0], 'title': book[1], 'copies': book[2]}
         result.append(books_dict)
 
     return result
