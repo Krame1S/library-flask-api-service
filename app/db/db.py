@@ -16,20 +16,14 @@ def get_db_connection():
 def get_all_books():
     conn = get_db_connection() 
     cursor = conn.cursor()
-    cursor.execute("""
-        SELECT b.isbn, b.title, l.borrower_name, b.copies_available
-        FROM books b
-        LEFT JOIN loans l ON b.isbn = l.isbn;
-    """)
+    cursor.execute("SELECT isbn, title, copies_available FROM books;")
     books = cursor.fetchall()
     cursor.close()
     conn.close()
 
     result = []
     for book in books:
-        books_dict = {'isbn': book[0], 'title': book[1], 'borrower': book[2], 'copies': book[3]}
-        if books_dict['borrower'] is None:
-            books_dict['borrower'] = 'None'
+        books_dict = {'isbn': book[0], 'title': book[1], 'copies': book[3]}
         result.append(books_dict)
 
     return result
