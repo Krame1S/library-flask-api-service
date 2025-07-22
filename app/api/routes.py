@@ -18,7 +18,7 @@ def register_routes(app):
             return jsonify({'message': 'Book created successfully'}), 201
         except ValueError as e:
             return jsonify({'error': str(e)}), 400
-        except Exception as e:
+        except Exception:
             return jsonify({'error': 'Server error'}), 500
 
     @app.route('/api/v1/books/<isbn>', methods=['PUT'])
@@ -31,7 +31,7 @@ def register_routes(app):
             return jsonify({'message': 'Book updated successfully'}), 200
         except ValueError as e:
             return jsonify({'error': str(e)}), 400
-        except Exception as e:
+        except Exception:
             return jsonify({'error': 'Server error'}), 500
 
     @app.route('/api/v1/books/<isbn>', methods=['DELETE'])
@@ -41,5 +41,5 @@ def register_routes(app):
             return jsonify({'message': 'Book deleted successfully'}), 200
         except ValueError as e:
             return jsonify({'error': str(e)}), 400
-        except Exception as e:
+        except Exception:
             return jsonify({'error': 'Server error'}), 500
