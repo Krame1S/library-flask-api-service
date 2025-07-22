@@ -2,19 +2,13 @@ import pytest
 from unittest.mock import Mock
 from app.services.library_service import get_books, create_book, update_book, delete_book
 
-@pytest.fixture
-def mock_db():
+@pytest.fixture(autouse=True)
+def setup_db(monkeypatch):
     db_mock = Mock()
-    # Set up mock to avoid actual DB calls
     db_mock.get_all_books.return_value = [
         {"isbn": "1234567890123", "title": "Test Book", "copies_available": 5}
     ]
-    return db_mock
-
-# Patch the db module in app.services.library_service
-@pytest.fixture(autouse=True)
-def setup_db(mock_db, monkeypatch):
-    monkeypatch.setattr("app.services.library_service.db", mock_db)
+    monkeypatch.setattr("app.services.library_service.db", db_mock)
 
 def test_get_books():
     result = get_books()
