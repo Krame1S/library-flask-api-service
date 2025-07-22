@@ -19,5 +19,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest flask psycopg2-binary python-dotenv
       - name: Run tests with pytest
+        env:
+          PYTHONPATH: .
         run: |
           pytest tests/test_library_service.py --verbose
